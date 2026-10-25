@@ -1,19 +1,21 @@
 # Elmer_IM2D_cases
 
-This fork is for experimentation and code changes without modifying the original repository.
+This fork keeps the original project intact while adding a parameterized full-machine branch for 2D induction-machine modelling.
 
-The original project is a 2D induction-machine case library built around a single-pole sector model. The geometry scripts have been generalized here so the same framework can be used for sector fractions of 1/4, 1/2, and 1/1 of the full stator/rotor tooth count.
+The original upstream repo models a single-pole sector of an induction machine. In the full machine, the number of active rotor bars and stator coil connections increases, so the case definition must be generated from the actual total tooth counts instead of being hardcoded to a reduced sector.
 
-The relevant geometry files are:
-- IM_one_pole/gmsh/im_stator.geo
-- IM_one_pole/gmsh/im_rotor.geo
+This branch adds a generator that can create a full-machine case for:
+- one-pole sector: N_ss = Qs/4, N_rs = Qr/4
+- half-machine sector: N_ss = Qs/2, N_rs = Qr/2
+- full-machine: N_ss = Qs, N_rs = Qr
 
-The code supports the following configurations:
-- N_ss = Qs/4 (one pole)
-- N_ss = Qs/2 (half-machine sector)
-- N_ss = Qs (full machine)
-- N_rs = Qr/4 (one pole)
-- N_rs = Qr/2 (half-machine sector)
-- N_rs = Qr (full machine)
+Generator:
+- scripts/generate_full_machine_case.py
 
-The repo privacy setting must be changed in the GitHub UI/API separately; it is not controlled by the code in this branch.
+Generated full-machine example:
+- IM_full_machine/
+
+Usage:
+  python scripts/generate_full_machine_case.py --qs 48 --qr 40 --ns 48 --nr 40
+
+The generated files keep the same Elmer structure but expand the rotor-body and stator-connection definitions to the actual machine size.
