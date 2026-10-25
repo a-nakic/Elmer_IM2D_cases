@@ -1,21 +1,11 @@
 # Elmer_IM2D_cases
 
-This fork keeps the original project intact while adding a parameterized full-machine branch for 2D induction-machine modelling.
+Example cases for 2D IM modelling in Elmer.
 
-The original upstream repo models a single-pole sector of an induction machine. In the full machine, the number of active rotor bars and stator coil connections increases, so the case definition must be generated from the actual total tooth counts instead of being hardcoded to a reduced sector.
+The original project is a set of reduced-sector induction-machine examples, including one-pole and multislice transient cases. This fork keeps those upstream examples in place and adds a full-machine generation workflow for rotor/stator counts that match a complete machine geometry.
 
-This branch adds a generator that can create a full-machine case for:
-- one-pole sector: N_ss = Qs/4, N_rs = Qr/4
-- half-machine sector: N_ss = Qs/2, N_rs = Qr/2
-- full-machine: N_ss = Qs, N_rs = Qr
-
-Generator:
-- scripts/generate_full_machine_case.py
-
-Generated full-machine example:
-- IM_full_machine/
-
-Usage:
-  python scripts/generate_full_machine_case.py --qs 48 --qr 40 --ns 48 --nr 40
-
-The generated files keep the same Elmer structure but expand the rotor-body and stator-connection definitions to the actual machine size.
+This branch includes:
+- original upstream `IM_one_pole` example case files
+- original upstream `IM_one_pole_multislice` files
+- modular full-machine geometry and solver generation utilities
+- harmonic .sif generation support

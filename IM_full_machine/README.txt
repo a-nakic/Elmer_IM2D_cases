@@ -1,2 +1,1 @@
-// full-machine case generator output
-the generated files are created by: python scripts/generate_full_machine_case.py
+# This file intentionally left blank; model geometry is generated via scripts and the original upstream files are retained for reference.
