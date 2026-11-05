@@ -1,0 +1,179 @@
+$ slip = 0.03333
+
+$ f = 50        ! [Hz] electrical frequency
+!$ U = 400*sqrt(2)/sqrt(3)       ! [V] rated voltage 326v peak
+$ U = 400*sqrt(2)/3       ! [V] rated voltage 188v peak
+$ pp = 2        ! number of polepairs
+$ n = 1450	    ! [rpm] rated speed
+
+$ l = 0.110     ! [m] stator stack length
+$ Rs = 0.50     ! [Ohm] stator phase resistance
+$ Nph = 22*8            ! Number of phase turns 
+$ w_syn = 1500/60*2*pi		! [rad/s] mech frequency
+
+!analytically estimated values:
+$ L_ew = 0.0002    ! [H] end winding phase inductance
+$ R_er = 0.0000016   ! [Ohm] end ring rotor resistance of a section betwen 2 bars
+$ L_er = 0.000000012  ! [H] end ring rotor inductance of a section between 2 bars
+
+
+
+!==========================================================
+! STATOR CIRCUITS
+! Two half-coils in series per phase
+! No parallel branches
+!==========================================================
+
+$ Circuits = 4
+
+!==========================================================
+! PHASE U: Components 101 (U+) and 104 (U-)
+!==========================================================
+
+$ C.1.variables = 8
+$ C.1.perm = zeros(C.1.variables)
+$ C.1.A = zeros(C.1.variables,C.1.variables)
+$ C.1.B = zeros(C.1.variables,C.1.variables)
+$ C.1.Mre = zeros(C.1.variables,C.1.variables)
+$ C.1.Mim = zeros(C.1.variables,C.1.variables)
+
+$ C.1.name.1 = "i_su"
+$ C.1.name.2 = "v_su"
+$ C.1.name.3 = "i_component(101)"
+$ C.1.name.4 = "v_component(101)"
+$ C.1.name.5 = "i_component(104)"
+$ C.1.name.6 = "v_component(104)"
+$ C.1.name.7 = "i_ewu"
+$ C.1.name.8 = "v_ewu"
+
+! Source
+$ C.1.B(0,1) = 1
+$ C.1.source.1 = "U_u"
+
+! KVL
+$ C.1.B(1,1) = -1
+$ C.1.B(1,3) = 1
+$ C.1.B(1,5) = -1
+$ C.1.B(1,7) = 1
+
+! KCL: U+
+$ C.1.B(2,0) = -1
+$ C.1.B(2,2) = 1
+
+! FE component 101 equation: row 3
+
+! KCL: U-
+$ C.1.B(4,0) = 1
+$ C.1.B(4,4) = 1
+
+! FE component 104 equation: row 5
+
+! KCL: end winding
+$ C.1.B(6,0) = -1
+$ C.1.B(6,6) = 1
+
+! End winding inductance
+$ C.1.A(7,6) = L_ew
+$ C.1.B(7,7) = -1
+
+
+!==========================================================
+! PHASE V: Components 102 (V+) and 105 (V-)
+!==========================================================
+
+$ C.2.variables = 8
+$ C.2.perm = zeros(C.2.variables)
+$ C.2.A = zeros(C.2.variables,C.2.variables)
+$ C.2.B = zeros(C.2.variables,C.2.variables)
+$ C.2.Mre = zeros(C.2.variables,C.2.variables)
+$ C.2.Mim = zeros(C.2.variables,C.2.variables)
+
+$ C.2.name.1 = "i_sv"
+$ C.2.name.2 = "v_sv"
+$ C.2.name.3 = "i_component(102)"
+$ C.2.name.4 = "v_component(102)"
+$ C.2.name.5 = "i_component(105)"
+$ C.2.name.6 = "v_component(105)"
+$ C.2.name.7 = "i_ewv"
+$ C.2.name.8 = "v_ewv"
+
+! Source
+$ C.2.B(0,1) = 1
+$ C.2.source.1 = "U_v"
+
+! KVL
+$ C.2.B(1,1) = -1
+$ C.2.B(1,3) = 1
+$ C.2.B(1,5) = -1
+$ C.2.B(1,7) = 1
+
+! KCL: V+
+$ C.2.B(2,0) = -1
+$ C.2.B(2,2) = 1
+
+! FE component 102 equation: row 3
+
+! KCL: V-
+$ C.2.B(4,0) = 1
+$ C.2.B(4,4) = 1
+
+! FE component 105 equation: row 5
+
+! KCL: end winding
+$ C.2.B(6,0) = -1
+$ C.2.B(6,6) = 1
+
+! End winding inductance
+$ C.2.A(7,6) = L_ew
+$ C.2.B(7,7) = -1
+
+
+!==========================================================
+! PHASE W: Components 106 (W+) and 103 (W-)
+!==========================================================
+
+$ C.3.variables = 8
+$ C.3.perm = zeros(C.3.variables)
+$ C.3.A = zeros(C.3.variables,C.3.variables)
+$ C.3.B = zeros(C.3.variables,C.3.variables)
+$ C.3.Mre = zeros(C.3.variables,C.3.variables)
+$ C.3.Mim = zeros(C.3.variables,C.3.variables)
+
+$ C.3.name.1 = "i_sw"
+$ C.3.name.2 = "v_sw"
+$ C.3.name.3 = "i_component(106)"
+$ C.3.name.4 = "v_component(106)"
+$ C.3.name.5 = "i_component(103)"
+$ C.3.name.6 = "v_component(103)"
+$ C.3.name.7 = "i_eww"
+$ C.3.name.8 = "v_eww"
+
+! Source
+$ C.3.B(0,1) = 1
+$ C.3.source.1 = "U_w"
+
+! KVL
+$ C.3.B(1,1) = -1
+$ C.3.B(1,3) = 1
+$ C.3.B(1,5) = -1
+$ C.3.B(1,7) = 1
+
+! KCL: W+
+$ C.3.B(2,0) = -1
+$ C.3.B(2,2) = 1
+
+! FE component 106 equation: row 3
+
+! KCL: W-
+$ C.3.B(4,0) = 1
+$ C.3.B(4,4) = 1
+
+! FE component 103 equation: row 5
+
+! KCL: end winding
+$ C.3.B(6,0) = -1
+$ C.3.B(6,6) = 1
+
+! End winding inductance
+$ C.3.A(7,6) = L_ew
+$ C.3.B(7,7) = -1

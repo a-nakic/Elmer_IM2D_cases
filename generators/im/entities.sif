@@ -1,0 +1,182 @@
+!------ Skeleton for body section -----
+Body 1
+  Name = U_plus
+End
+
+Body 2
+  Name = W_minus
+End
+
+Body 3
+  Name = V_plus
+End
+
+Body 4
+  Name = U_minus
+End
+
+Body 5
+  Name = W_plus
+End
+
+Body 6
+  Name = V_minus
+End
+
+Body 7
+  Name = StatorIron
+End
+
+Body 8
+  Name = StatorWedges
+End
+
+Body 9
+  Name = StatorAirgap
+End
+
+Body 10
+  Name = Bar10
+End
+
+Body 11
+  Name = Bar11
+End
+
+Body 12
+  Name = Bar12
+End
+
+Body 13
+  Name = Bar13
+End
+
+Body 14
+  Name = Bar14
+End
+
+Body 15
+  Name = Bar15
+End
+
+Body 16
+  Name = Bar16
+End
+
+Body 17
+  Name = Bar17
+End
+
+Body 18
+  Name = Bar18
+End
+
+Body 19
+  Name = Bar19
+End
+
+Body 20
+  Name = Bar20
+End
+
+Body 21
+  Name = Bar21
+End
+
+Body 22
+  Name = Bar22
+End
+
+Body 23
+  Name = Bar23
+End
+
+Body 24
+  Name = Bar24
+End
+
+Body 25
+  Name = Bar25
+End
+
+Body 26
+  Name = Bar26
+End
+
+Body 27
+  Name = Bar27
+End
+
+Body 28
+  Name = Bar28
+End
+
+Body 29
+  Name = Bar29
+End
+
+Body 30
+  Name = Bar30
+End
+
+Body 31
+  Name = RotorIron
+End
+
+Body 32
+  Name = RotorAirgap
+End
+
+Body 33
+  Name = Bar1
+End
+
+Body 34
+  Name = Bar2
+End
+
+Body 35
+  Name = Bar3
+End
+
+Body 36
+  Name = Bar4
+End
+
+Body 37
+  Name = Bar5
+End
+
+Body 38
+  Name = Bar6
+End
+
+Body 39
+  Name = Bar7
+End
+
+Body 40
+  Name = Bar8
+End
+
+Body 41
+  Name = Bar9
+End
+
+!------ Skeleton for boundary section -----
+Boundary Condition 1
+  Name = OuterStator
+End
+
+Boundary Condition 2
+  Name = Sliding_Stator
+End
+
+Boundary Condition 3
+  Name = Sliding_Rotor
+End
+
+Boundary Condition 4
+  Name = InnerRotor
+End
+
